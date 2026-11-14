@@ -1,4 +1,4 @@
-f/**
+/**
  * Username-based Wallpaper API Route
  * 
  * Handles requests to /api/[username] and generates wallpapers
@@ -13,6 +13,7 @@ import { getUserConfigByUsername, getPlugin, logWallpaperEvent } from '@/lib/fir
 import { Plugin, UserConfig } from '@/lib/types';
 import { isPlanExpired } from '@/lib/plan-utils';
 import { loadPluginFromCode } from '@/lib/plugin-system';
+import { STATUE_DEFAULT_OPACITY, STATUE_IMAGE_URL } from '@/lib/statue-background';
 import { computeWallpaperHash, loadWallpaperCache, storeWallpaperCache } from '@/lib/wallpaper-cache';
 import LifeView from '../wallpaper/life-view-enhanced';
 import YearView from '../wallpaper/year-view-enhanced';
@@ -260,14 +261,14 @@ export async function GET(
       }
     }
 
-    
-if (!backgroundImageProp) {
-  backgroundImageProp = {
-    url: new URL('/statue-memento.webp', request.nextUrl.origin).toString(),
-    opacity: 0.7,
-  };
-}
-
+    // Default background: Memento Mori statue (embedded JPEG data URL —
+    // @vercel/og cannot decode WebP and needs no network fetch this way)
+    if (!backgroundImageProp) {
+      backgroundImageProp = {
+        url: STATUE_IMAGE_URL,
+        opacity: STATUE_DEFAULT_OPACITY,
+      };
+    }
 
     // Prepare view props
     const viewProps = {

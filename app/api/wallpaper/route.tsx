@@ -8,8 +8,11 @@ import { NextRequest } from 'next/server';
 import { YearView } from './year-view';
 import { LifeView } from './life-view';
 import { logWallpaperEvent } from '@/lib/firebase-server';
+import { getStatueOpacityFromParams } from '@/lib/statue-background';
 
-export const runtime = 'edge';
+// Node.js runtime (like /api/[username]): the embedded statue image (~140 KB)
+// would push the Edge bundle close to Vercel's 1 MB Hobby limit for Edge functions.
+export const runtime = 'nodejs';
 
 export async function GET(request: NextRequest) {
   try {
@@ -21,6 +24,8 @@ export async function GET(request: NextRequest) {
     const daysLayoutMode = searchParams.get('daysLayoutMode') === 'calendar' ? 'calendar' : 'continuous';
     const viewMode = searchParams.get('viewMode') || 'year';
     const birthDate = searchParams.get('birthDate') || '';
+    // Optional: ?statueOpacity=0.5 or ?statue=off — defaults to STATUE_DEFAULT_OPACITY
+    const statueOpacity = getStatueOpacityFromParams(searchParams);
 
     let content;
 
@@ -28,7 +33,7 @@ export async function GET(request: NextRequest) {
       content = <LifeView width={width} height={height} birthDate={birthDate} />;
     } else {
       // Default to Year View
-      content = <YearView width={width} height={height} isMondayFirst={isMondayFirst} yearViewLayout={yearViewLayout} daysLayoutMode={daysLayoutMode} />;
+      content = <YearView width={width} height={height} isMondayFirst={isMondayFirst} yearViewLayout={yearViewLayout} daysLayoutMode={daysLayoutMode} statueOpacity={statueOpacity} />;
     }
 
     // Compute seconds remaining until midnight UTC so the cache expires

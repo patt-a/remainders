@@ -3,6 +3,7 @@ import {
     getCurrentDayOfYear,
     getTotalDaysInCurrentYear,
 } from '@/lib/calcs';
+import { StatueBackground, STATUE_DEFAULT_OPACITY } from '@/lib/statue-background';
 
 interface YearViewProps {
     width: number;
@@ -10,9 +11,11 @@ interface YearViewProps {
     isMondayFirst: boolean;
     yearViewLayout?: 'months' | 'days';
     daysLayoutMode?: 'calendar' | 'continuous';
+    /** Statue opacity (0–1). 0 hides the statue. */
+    statueOpacity?: number;
 }
 
-export function YearView({ width, height, isMondayFirst, yearViewLayout = 'months', daysLayoutMode = 'continuous' }: YearViewProps) {
+export function YearView({ width, height, isMondayFirst, yearViewLayout = 'months', daysLayoutMode = 'continuous', statueOpacity = STATUE_DEFAULT_OPACITY }: YearViewProps) {
     // Colors Config
     const BG_COLOR = '#1a1a1a'; // Dark background
     const TEXT_COLOR = '#888888'; // Grey for text
@@ -117,20 +120,8 @@ export function YearView({ width, height, isMondayFirst, yearViewLayout = 'month
                     position: 'relative',
                 }}
             >
-                
-<img 
-    src="https://remaindersss.vercel.app/statue-memento.webp"
-  alt=""
-  style={{
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    opacity: 0.7,
-  }}
-/>
+                {/* Statue background — first child so the dots stay in the foreground */}
+                <StatueBackground width={width} height={height} opacity={statueOpacity} />
 
                 <div style={{ display: 'flex', position: 'relative', width: '100%', height: '100%' }}>
                     {allDots}
@@ -313,20 +304,8 @@ export function YearView({ width, height, isMondayFirst, yearViewLayout = 'month
                 position: 'relative',
             }}
         >
-            
-<img
-  src="https://remaindersss.vercel.app/statue-memento.webp"
-  alt=""
-  style={{
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    opacity: 0.7,
-  }}
-/>
+            {/* Statue background — first child so the dots stay in the foreground */}
+            <StatueBackground width={width} height={height} opacity={statueOpacity} />
 
             <div style={{ display: 'flex', position: 'relative', width: '100%', height: '100%' }}>
                 {monthCells}
