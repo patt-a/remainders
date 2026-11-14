@@ -1,4 +1,4 @@
-/**
+f/**
  * Username-based Wallpaper API Route
  * 
  * Handles requests to /api/[username] and generates wallpapers
@@ -259,6 +259,15 @@ export async function GET(
         };
       }
     }
+
+    
+if (!backgroundImageProp) {
+  backgroundImageProp = {
+    url: new URL('/statue-memento.webp', request.nextUrl.origin).toString(),
+    opacity: 0.7,
+  };
+}
+
 
     // Prepare view props
     const viewProps = {
