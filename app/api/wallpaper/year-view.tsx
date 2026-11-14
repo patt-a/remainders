@@ -119,7 +119,7 @@ export function YearView({ width, height, isMondayFirst, yearViewLayout = 'month
             >
                 
 <img 
-    src="/statue-memento.webp"
+    src="https://remaindersss.vercel.app/statue-memento.webp"
   alt=""
   style={{
     position: 'absolute',
@@ -315,7 +315,7 @@ export function YearView({ width, height, isMondayFirst, yearViewLayout = 'month
         >
             
 <img
-  src="/statue-memento.webp"
+  src="https://remaindersss.vercel.app/statue-memento.webp"
   alt=""
   style={{
     position: 'absolute',
