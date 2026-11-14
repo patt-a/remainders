@@ -117,6 +117,21 @@ export function YearView({ width, height, isMondayFirst, yearViewLayout = 'month
                     position: 'relative',
                 }}
             >
+                
+<img 
+    src="/statue-memento.webp"
+  alt=""
+  style={{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    opacity: 0.7,
+  }}
+/>
+
                 <div style={{ display: 'flex', position: 'relative', width: '100%', height: '100%' }}>
                     {allDots}
                 </div>
@@ -298,6 +313,21 @@ export function YearView({ width, height, isMondayFirst, yearViewLayout = 'month
                 position: 'relative',
             }}
         >
+            
+<img
+  src="/statue-memento.webp"
+  alt=""
+  style={{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    opacity: 0.7,
+  }}
+/>
+
             <div style={{ display: 'flex', position: 'relative', width: '100%', height: '100%' }}>
                 {monthCells}
             </div>
